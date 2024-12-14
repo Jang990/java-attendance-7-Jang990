@@ -4,17 +4,18 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class AttendanceTime implements Comparable<AttendanceTime> {
     private static final int TARDINESS_MINUTE = 5;
     private static final int ABSENCE_MINUTE = 30;
 
+    private static final int MONDAY_START_HOUR = 13;
+    private static final int NORMAL_START_HOUR = 10;
+    private static final int NORMAL_END_HOUR = 18;
     private static final LocalTime MONDAY_TARDINESS = LocalTime.of(13, TARDINESS_MINUTE);
     private static final LocalTime MONDAY_ABSENCE = LocalTime.of(13, ABSENCE_MINUTE);
     private static final LocalTime NORMAL_TARDINESS = LocalTime.of(10, TARDINESS_MINUTE);
     private static final LocalTime NORMAL_ABSENCE = LocalTime.of(10, ABSENCE_MINUTE);
-    private static final LocalTime NORMAL_END = LocalTime.of(18, 0);
 
     private final LocalDateTime dateTime;
 
@@ -22,6 +23,10 @@ public class AttendanceTime implements Comparable<AttendanceTime> {
         if(dateTime.getDayOfWeek().equals(DayOfWeek.SATURDAY)
                 || dateTime.getDayOfWeek().equals(DayOfWeek.SUNDAY))
             throw new IllegalArgumentException();
+        if(dateTime.getHour() > NORMAL_END_HOUR
+                || (dateTime.getDayOfWeek().equals(DayOfWeek.MONDAY) && dateTime.getHour() < MONDAY_START_HOUR)
+                || (!dateTime.getDayOfWeek().equals(DayOfWeek.MONDAY) && dateTime.getHour() < NORMAL_START_HOUR))
+            throw new IllegalArgumentException("[ERROR] 캠퍼스 운영 시간에만 출석이 가능합니다.");
         this.dateTime = dateTime;
     }
 
