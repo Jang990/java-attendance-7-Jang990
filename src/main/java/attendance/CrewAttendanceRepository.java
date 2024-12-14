@@ -30,4 +30,8 @@ public class CrewAttendanceRepository {
     public boolean hasCrew(String name) {
         return map.containsKey(name);
     }
+
+    public List<AttendanceHistory> findAll() {
+        return map.values().stream().toList();
+    }
 }

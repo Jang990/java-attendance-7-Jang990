@@ -1,10 +1,10 @@
 package attendance.attendance;
 
 public enum CrewStatus {
-    NORMAL(""),
-    WARNING("경고"),
+    EXPELLED("제적"),
     MEETING("면담"),
-    EXPELLED("제적");
+    WARNING("경고"),
+    NORMAL("");
 
     private final String name;
 
