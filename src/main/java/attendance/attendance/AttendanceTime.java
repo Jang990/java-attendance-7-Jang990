@@ -29,6 +29,10 @@ public class AttendanceTime {
         return dateTime.toLocalDate().equals(date);
     }
 
+    public LocalTime getTime() {
+        return dateTime.toLocalTime();
+    }
+
     @Override
     public String toString() {
         return "%02d월 %02d일 %s %02d:%02d (%s)".formatted(

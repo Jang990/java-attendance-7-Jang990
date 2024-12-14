@@ -19,7 +19,6 @@ public class AttendanceHistory {
             throw new IllegalArgumentException("[ERROR] 이미 출석을 확인하였습니다. 필요한 경우 수정 기능을 이용해 주세요.");
         AttendanceTime result = new AttendanceTime(attendanceTime);
         history.add(result);
-        System.out.println(result);
     }
 
     public boolean isAlreadyAttended(LocalDate date) {
@@ -67,5 +66,30 @@ public class AttendanceHistory {
                         countAbsence(),
                         countTardiness(),
                         getCrewStatus().getName());
+    }
+
+    public AttendanceTime getSameDate(LocalDateTime time) {
+        Integer idx = findSameDateIdx(time);
+        if(idx == null) return null;
+        return history.get(idx);
+    }
+
+    public void modify(LocalDateTime time) {
+        AttendanceTime sameDateTime = getSameDate(time);
+        history.remove(sameDateTime);
+        AttendanceTime after = new AttendanceTime(time);
+        history.add(after);
+
+        System.out.println("%s -> %02d:%02d (%s) 수정 완료!".formatted(
+                sameDateTime, after.getTime().getHour(), after.getTime().getMinute(),
+                after.getStatus().getName()));
+    }
+
+    private Integer findSameDateIdx(LocalDateTime time) {
+        for (int i = 0; i < history.size(); i++) {
+            if(history.get(i).isSameDate(time.toLocalDate()))
+                return i;
+        }
+        return null;
     }
 }
