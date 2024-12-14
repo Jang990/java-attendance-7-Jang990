@@ -1,6 +1,7 @@
 package attendance.attendance;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +23,10 @@ public class AttendanceTime {
                 || dateTime.getDayOfWeek().equals(DayOfWeek.SUNDAY))
             throw new IllegalArgumentException();
         this.dateTime = dateTime;
+    }
+
+    public boolean isSameDate(LocalDate date) {
+        return dateTime.toLocalDate().equals(date);
     }
 
     @Override
