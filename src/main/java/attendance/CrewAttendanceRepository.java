@@ -26,4 +26,8 @@ public class CrewAttendanceRepository {
     public AttendanceHistory get(String crwName) {
         return map.get(crwName);
     }
+
+    public boolean hasCrew(String name) {
+        return map.containsKey(name);
+    }
 }

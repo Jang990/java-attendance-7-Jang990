@@ -16,8 +16,10 @@ public class AttendanceHistory {
 
     public void add(LocalDateTime attendanceTime) {
         if(isAlreadyAttended(attendanceTime.toLocalDate()))
-            throw new IllegalArgumentException("");
-        history.add(new AttendanceTime(attendanceTime));
+            throw new IllegalArgumentException("[ERROR] 이미 출석을 확인하였습니다. 필요한 경우 수정 기능을 이용해 주세요.");
+        AttendanceTime result = new AttendanceTime(attendanceTime);
+        history.add(result);
+        System.out.println(result);
     }
 
     public boolean isAlreadyAttended(LocalDate date) {
