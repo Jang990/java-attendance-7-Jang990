@@ -58,6 +58,14 @@ public class AttendanceHistory {
         return CrewStatus.EXPELLED;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public List<AttendanceTime> getHistory() {
+        return history;
+    }
+
     @Override
     public String toString() {
         return "- %s: 결석 %d회, 지각 %d회 (%s)"

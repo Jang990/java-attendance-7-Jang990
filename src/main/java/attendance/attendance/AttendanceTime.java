@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class AttendanceTime {
+public class AttendanceTime implements Comparable<AttendanceTime> {
     private static final int TARDINESS_MINUTE = 5;
     private static final int ABSENCE_MINUTE = 30;
 
@@ -31,6 +31,10 @@ public class AttendanceTime {
 
     public LocalTime getTime() {
         return dateTime.toLocalTime();
+    }
+
+    public int getDayOfMonth() {
+        return dateTime.getDayOfMonth();
     }
 
     @Override
@@ -83,5 +87,10 @@ public class AttendanceTime {
 
     private LocalTime time() {
         return dateTime.toLocalTime();
+    }
+
+    @Override
+    public int compareTo(AttendanceTime o) {
+        return dateTime.compareTo(o.dateTime);
     }
 }
