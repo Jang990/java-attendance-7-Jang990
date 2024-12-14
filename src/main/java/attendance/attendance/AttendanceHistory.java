@@ -24,4 +24,25 @@ public class AttendanceHistory {
         return history.stream()
                 .anyMatch((attendanceTime -> attendanceTime.isSameDate(date)));
     }
+
+    public int countAttendance() {
+        return (int) history.stream()
+                .filter(attendanceTime ->
+                        AttendanceStatus.ATTENDANCE.equals(attendanceTime.getStatus()))
+                .count();
+    }
+
+    public int countTardiness() {
+        return (int) history.stream()
+                .filter(attendanceTime ->
+                        AttendanceStatus.TARDINESS.equals(attendanceTime.getStatus()))
+                .count();
+    }
+
+    public int countAbsence() {
+        return (int) history.stream()
+                .filter(attendanceTime ->
+                        AttendanceStatus.ABSENCE.equals(attendanceTime.getStatus()))
+                .count();
+    }
 }
