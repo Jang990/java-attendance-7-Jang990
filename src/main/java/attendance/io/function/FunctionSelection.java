@@ -1,4 +1,4 @@
-package attendance.io;
+package attendance.io.function;
 
 public enum FunctionSelection {
     CONFIRMATION("1", "출석 확인"),

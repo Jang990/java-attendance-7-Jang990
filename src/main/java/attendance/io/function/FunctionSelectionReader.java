@@ -1,6 +1,7 @@
-package attendance.io;
+package attendance.io.function;
 
 import attendance.DateFormatUtils;
+import attendance.io.InputReader;
 import camp.nextstep.edu.missionutils.DateTimes;
 
 public class FunctionSelectionReader {

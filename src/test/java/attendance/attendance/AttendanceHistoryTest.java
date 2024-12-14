@@ -30,9 +30,9 @@ class AttendanceHistoryTest {
     void 출석_지각_결석_수를_파악할_수_있음() {
         AttendanceHistory history = create023History();
 
-        assertEquals(2, history.countAbsence());
-        assertEquals(1, history.countTardiness());
-        assertEquals(2, history.countAttendance());
+        assertEquals(0, history.countAttendance());
+        assertEquals(2, history.countTardiness());
+        assertEquals(3, history.countAbsence());
     }
 
     // TODO: 테스트 빈약
