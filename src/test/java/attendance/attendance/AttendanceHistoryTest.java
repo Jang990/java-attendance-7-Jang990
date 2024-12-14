@@ -28,22 +28,39 @@ class AttendanceHistoryTest {
 
     @Test
     void 출석_지각_결석_수를_파악할_수_있음() {
-        AttendanceHistory history = new AttendanceHistory("ABC");
-
-        // 결석
-        history.add(LocalDateTime.of(2024, 12, 13, 14, 0, 0));
-        history.add(LocalDateTime.of(2024, 12, 12, 14, 0, 0));
-
-        // 지각
-        history.add(LocalDateTime.of(2024, 12, 11, 10, 29, 0));
-
-        // 출석
-        history.add(LocalDateTime.of(2024, 12, 10, 10, 0, 0));
-        history.add(LocalDateTime.of(2024, 12, 9, 13, 0, 0));
+        AttendanceHistory history = create023History();
 
         assertEquals(2, history.countAbsence());
         assertEquals(1, history.countTardiness());
         assertEquals(2, history.countAttendance());
+    }
+
+    // TODO: 테스트 빈약
+    @Test
+    void 학생_상태_조회_가능() {
+        AttendanceHistory history = create023History();
+        assertEquals(CrewStatus.MEETING, history.getCrewStatus());
+    }
+
+    @Test
+    void 학생_상태_toString() {
+        AttendanceHistory history = create023History();
+        assertEquals("- 빙티: 결석 3회, 지각 2회 (면담)", history.toString());
+    }
+
+    private AttendanceHistory create023History() {
+        AttendanceHistory history = new AttendanceHistory("빙티");
+
+        // 지각
+        history.add(LocalDateTime.of(2024, 12, 9, 13, 6, 0));
+        history.add(LocalDateTime.of(2024, 12, 10, 10, 29, 0));
+
+        // 결석
+        history.add(LocalDateTime.of(2024, 12, 11, 14, 0, 0));
+        history.add(LocalDateTime.of(2024, 12, 12, 14, 0, 0));
+        history.add(LocalDateTime.of(2024, 12, 13, 14, 0, 0));
+
+        return history;
     }
 
 }

@@ -45,4 +45,25 @@ public class AttendanceHistory {
                         AttendanceStatus.ABSENCE.equals(attendanceTime.getStatus()))
                 .count();
     }
+
+    public CrewStatus getCrewStatus() {
+        int absence = countTardiness() / 3 + countAbsence();
+        if(absence < 2)
+            return CrewStatus.NORMAL;
+        if(absence < 3)
+            return CrewStatus.WARNING;
+        if(absence <= 5)
+            return CrewStatus.MEETING;
+        return CrewStatus.EXPELLED;
+    }
+
+    @Override
+    public String toString() {
+        return "- %s: 결석 %d회, 지각 %d회 (%s)"
+                .formatted(
+                        name,
+                        countAbsence(),
+                        countTardiness(),
+                        getCrewStatus().getName());
+    }
 }
